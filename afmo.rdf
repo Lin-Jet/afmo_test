@@ -32,16 +32,15 @@
 - Evidence and Conclusion Ontology
 - FRBR-aligned Bibliographic Ontology (FaBiO)
 - Friend of a Friend (FOAF) Ontology
-- Human Phenotype Ontology
 - SAREF Ontology
 - SAREF4Wear Ontology
-- SAREF4health Ontology
+- SAREF4Health Ontology
 
 Health domain concepts have been manually cross-referenced to concepts from the Unified Medical Language System (UMLS) metathesaurus, which maps to several medical vocabularies and databases, including:
 
 - SNOMED CT (US)
 - Medical Subject Headings (MeSH) Thesaurus
-- Nactional cancer Institute (NCI) Thesaurus
+- National cancer Institute (NCI) Thesaurus
 - MedlinePlus</rdfs:comment>
     </owl:Ontology>
     
@@ -367,6 +366,17 @@ Health domain concepts have been manually cross-referenced to concepts from the 
         <rdfs:range rdf:resource="http://purl.org/afmo#RiskFactor"/>
         <rdfs:comment>The relationship between a monitored person and a risk factor.</rdfs:comment>
         <rdfs:label>has factor</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/afmo#hasHeightGroup -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/afmo#hasHeightGroup">
+        <owl:inverseOf rdf:resource="http://purl.org/afmo#isHeightGroupOf"/>
+        <rdfs:domain rdf:resource="http://purl.org/afmo#MonitoredPerson"/>
+        <rdfs:range rdf:resource="http://purl.org/afmo#HeightGroup"/>
+        <rdfs:label>has height group</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -714,6 +724,16 @@ Health domain concepts have been manually cross-referenced to concepts from the 
         <rdfs:range rdf:resource="http://purl.org/afmo#BMICategory"/>
         <rdfs:comment>Transitive property to add order to the BMICategory class.</rdfs:comment>
         <rdfs:label>is higher BMI than</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/afmo#isHeightGroupOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/afmo#isHeightGroupOf">
+        <rdfs:domain rdf:resource="http://purl.org/afmo#HeightGroup"/>
+        <rdfs:range rdf:resource="http://purl.org/afmo#MonitoredPerson"/>
+        <rdfs:label>is height group of</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -2709,6 +2729,12 @@ Recommended best practice is to identify the resource by means of a string confo
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/afmo#hasHeightGroup"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/afmo#HeightGroup"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/afmo#hasMeasurement"/>
                 <owl:someValuesFrom rdf:resource="https://saref.etsi.org/core/Measurement"/>
             </owl:Restriction>
@@ -3420,6 +3446,12 @@ E.g. see http://www.emeraldgrouppublishing.com/products/journals/author_guidelin
     <!-- http://xmlns.com/foaf/0.1/Person -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/afmo#isAuthorOf"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/afmo#Publication"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://xmlns.com/foaf/0.1/firstName"/>
